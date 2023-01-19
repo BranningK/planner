@@ -1,5 +1,8 @@
 var tasks = []
-
+var boxHr = $('.hour');
+console.log(boxHr.html());
+var currentHR = dayjs().hour();
+console.log(currentHR);
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
@@ -16,7 +19,13 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  //
+  if (boxHr.html() < currentHR){
+    console.log('less than');
+  } else if(boxHr.html() == currentHR){
+    console.log('current');
+  } else{
+    console.log('future');
+  }
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
@@ -25,7 +34,9 @@ $(function () {
 }); 
 
 //Displays the current date in the header
-document.getElementById('currentDay').textContent = dayjs().format('dddd, MMMM D, YYYY');
+var timeOfDay = dayjs().format('dddd, MMMM D, YYYY');
+document.getElementById('currentDay').textContent = timeOfDay;
+
 
 //Adds event listener to all save buttons
 $( ".saveBtn" ).click(function() {
@@ -36,6 +47,7 @@ $( ".saveBtn" ).click(function() {
 function saveTask() {
   // Stringify and set key in localStorage to todos array
   localStorage.setItem("Tasks", JSON.stringify(tasks));
+  renderTasks();
 }
 
 // Add submit event to form
@@ -58,8 +70,8 @@ $( ".saveBtn" ).click(function(event) {
 });
 
 // The following function renders items in a todo list as <li> elements
-function renderTasks() {
-  preventDefault()
+function renderTasks(event) {
+  event.preventDefault()
   // Clear todoList element and update todoCountSpan
   tasks.innerHTML = "";
   tasksCountSpan.textContent = tasks.length;
