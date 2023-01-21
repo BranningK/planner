@@ -2,6 +2,8 @@ var tasks = []
 var boxHr = $('.hour');
 console.log(boxHr.html());
 var currentHR = dayjs().hour();
+
+
 console.log(currentHR);
 console.log(typeof currentHR);
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
@@ -32,16 +34,12 @@ $(function () {
   //  console.log(blockID);
   //  console.log(typeof blockID);
 
-  
+    // Sets class for the box's background color
     if (blockID < currentHR){
-      console.log('less than');
-    //  $(this).setAttribute('class', "past")
       $(this).addClass('past');
     } else if(blockID == currentHR){
-      console.log('current');
       $(this).addClass('present');
     } else{
-      console.log('future');
       $(this).addClass('future');
     }
 
@@ -49,18 +47,9 @@ $(function () {
     // we have a STRING to compare to a NUMBER
     // we could pull out the numbers only (algo)
     // we could convert the data type STRING --> ARRAY ["hour", "xx"]; || ["h", "o", "u" ...]
-    console.log("*********")
-  })
+    // console.log("*********");
+  });
 
-  /*
-  allBlocks.forEach(function() {
-
-  })
-
-  for(var i = 0; i < allBlocks.length - 1; i++) {
-    var timeHour = allBlocks[i].getAttribute
-  }
-  */
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
@@ -74,11 +63,6 @@ document.getElementById('currentDay').textContent = timeOfDay;
 
 
 //Adds event listener to all save buttons
-$( ".saveBtn" ).click(function(event) {
-  console.log(event.target);
-  console.log( "Saving..." );
-  saveTask(event);
-});
 
 function saveTask(event) {
   // Stringify and set key in localStorage to todos array
@@ -94,7 +78,7 @@ $( ".saveBtn" ).click(function(event) {
 
   var taskText = taskInput.value.trim();
 
-  // Return from function early if submitted todoText is blank
+  // Return from function if todoText is blank
   if (taskText === "") {
     return;
   }
@@ -108,8 +92,7 @@ $( ".saveBtn" ).click(function(event) {
 });
 
 // The following function renders items in a todo list as <li> elements
-function renderTasks(event) {
-  // event.preventDefault()
+function renderTasks() {
   // Clear todoList element and update todoCountSpan
   tasks.innerHTML = "";
   tasksCountSpan.textContent = tasks.length;
